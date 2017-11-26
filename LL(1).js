@@ -25,9 +25,9 @@ rl.on('line',line=>{
 
 rl.on('close',()=>{
     let str = _.initial(_.join(inputStr,'')).join('');
-    let lexicalResult = lexical(str);
+    let lexicalResult = lexical(str);   //调用词法分析器
 
-    analysis(lexicalResult);  //调用词法分析器
+    analysis(lexicalResult);
 });
 
 

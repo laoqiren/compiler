@@ -33,25 +33,29 @@ rl.on('close',()=>{
 
 function analysis(lexicalResult){
     let tokens = lexicalResult.map(v=>v.token);
-    let inputs = [...tokens];
+    let inputs = [...tokens,'$'];
     let stack = [Object.keys(table)[0],'$'];
     let isLegal = true;
 
     console.log(`stack: ${stack}  inputs: ${inputs.join('')}`);
-    while(_.head(stack)!=='$' && inputs.length!==0){
+    while(_.head(stack)!=='$'){
         let stackTop = stack.shift(),
             inputsTop = _.head(inputs);
         if(stackTop === inputsTop){
             inputs.shift();
             console.log(`stack: ${stack}  inputs: ${inputs.join('')}  匹配: ${inputsTop}`);
-        } else if(tokens.indexOf(stackTop) !== -1){
-            console.error("error: 栈顶不能为终结符！");
+        } else if(tokens.indexOf(stackTop) !== -1 && stackTop !== inputsTop){
+            console.error("error: 栈顶为终结符但与输入符号不匹配！弹出栈顶非终结符");
             isLegal = false;
-            break;
         } else if(!table[stackTop][inputsTop]){
-            console.error('error：预测分析表相应位置为报错条目！');
+            console.error('error：预测分析表相应位置为空！忽略输入符号');
+            inputs.shift();
+            stack.unshift(stackTop);
+            console.log(`stack: ${stack}  inputs: ${inputs.join('')}`);
+        } else if(table[stackTop][inputsTop] === 'synch'){
+            console.log('相应条目为synch,弹出栈顶符号');
+            console.log(`stack: ${stack}  inputs: ${inputs.join('')}`);
             isLegal = false;
-            break;
         } else {
             let tableResult = table[stackTop][inputsTop];
             stack.unshift(...tableResult.split(''));

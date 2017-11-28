@@ -2,9 +2,9 @@
     "E": {
         "*": false,
         "(": "TY",
-        ")": false,
+        ")": "synch",
         "i": "TY",
-        "$": false,
+        "$": "synch",
         "+": false
     },
     "Y": {
@@ -18,10 +18,10 @@
     "T": {
         "*": false,
         "(": "FZ",
-        ")": false,
+        ")": "synch",
         "i": "FZ",
-        "$": false,
-        "+": false
+        "$": "synch",
+        "+": "synch"
     },
     "Z": {
         "*": "*FZ",
@@ -32,11 +32,11 @@
         "+": "#"
     },
     "F": {
-        "*": false,
+        "*": "synch",
         "(": "(E)",
-        ")": false,
+        ")": "synch",
         "i": "i",
-        "$": false,
-        "+": false
+        "$": "synch",
+        "+": "synch"
     }
 }

@@ -51,10 +51,10 @@ function analysis(lexicalResult){
             console.error('error：预测分析表相应位置为空！忽略输入符号');
             inputs.shift();
             stack.unshift(stackTop);
+            isLegal = false;
             console.log(`stack: ${stack}  inputs: ${inputs.join('')}`);
         } else if(table[stackTop][inputsTop] === 'synch'){
-            console.log('相应条目为synch,弹出栈顶符号');
-            console.log(`stack: ${stack}  inputs: ${inputs.join('')}`);
+            console.log(`stack: ${stack}  inputs: ${inputs.join('')} 相应条目为synch,弹出栈顶符号`);
             isLegal = false;
         } else {
             let tableResult = table[stackTop][inputsTop];
